@@ -9,24 +9,9 @@ const authPassport = require('./auth-passport');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-let users;
-
-/**
- * Heroku-friendly production http server.
- *
- * Serves your app and allows you to proxy APIs if needed.
- */
 
 const app = express();
 const PORT = process.env.PORT || 8080;
-
-authPassport.readUsers()
-  .then( (_users) => {
-    users = _users;
-  })
-  .catch( (err) => {
-    throw err;
-  });
 
 // Enable various security helpers.
 app.use(helmet());
@@ -37,26 +22,21 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+const users = {};
+
 passport.use(new LocalStrategy(
   (username, password, done) => {
     authPassport.authenticateUser(username, password, users)
-    .then( (authResult) => {
-      return done(null, authResult);
-    })
-    .then(null, (message) => {
-      return done(null, false, message);
-    });
+      .then(
+        res => done(null, res),
+        msg => done(null, false, message));
   }
-
 ));
 
-passport.serializeUser( (user, done) => {
-  done(null, user.meta.id);
-});
+passport.serializeUser((user, done) => done(null, user.id));
 
-passport.deserializeUser( (id, done) => {
-  done(null, authPassport.getUserById(id, users));
-});
+passport.deserializeUser(
+  (id, done) => done(null, authPassport.getUserById(id, users)));
 
 app.post('/api/auth/login',
   passport.authenticate('local'),

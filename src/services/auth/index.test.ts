@@ -1,102 +1,72 @@
+import { provide, ReflectiveInjector } from '@angular/core';
+import { MockBackend } from '@angular/http/testing';
 import {
-  it,
-  xit,
-  describe,
-  expect,
+  fakeAsync,
   inject,
-  async,
-  beforeEach,
-  beforeEachProviders
+  it,
+  describe,
+  tick
 } from '@angular/core/testing';
+import {
+  BaseRequestOptions,
+  ConnectionBackend,
+  Headers,
+  Http,
+  Response,
+  ResponseType
+} from '@angular/http';
 
-import {provide} from '@angular/core';
+import { AuthService } from './index';
 
-import {AuthService} from './index';
-import isPromise from '../../utils/is-promise';
-import {Observable} from 'rxjs/Observable';
+describe('authenticator-service', () => {
+  it('should accept a valid email address',
+    fakeAsync(inject([], () => {
+      const injector = ReflectiveInjector.resolveAndCreate([
+        AuthService,
+        MockBackend,
+        BaseRequestOptions,
+        provide(Http, {
+          useFactory: (backend, options) => {
+            return new Http(backend, options);
+          },
+          deps: [MockBackend, BaseRequestOptions]
+        })
+      ]);
 
-describe('Testing authentication service', () => {
-  let _mockServerService;
-  let authService;
-  let credentials = {
-    id: '1',
-    username: 'user',
-    password: 'pass',
-    name: 'testuser',
-  };
+      const http = injector.get(Http);
 
-  beforeEachProviders(() => {
-    _mockServerService = {
-      post: (path, data) => {
-        return new Observable(observer => {
-          if (data.username === credentials.username
-            && data.password === credentials.password) {
-            setTimeout(() => {
-              observer.next({ meta: {
-                id: credentials.id,
-                name: credentials.name,
-              } });
-              observer.complete();
-            }, 1500);
-          } else {
-            setTimeout(() => {
-              observer.error('Invalid login attempt');
-            }, 1500);
-          }
-        });
+      const backend = injector.get(MockBackend);
+
+      let connection;
+      backend.connections.subscribe(c => connection = c);
+
+      const service = injector.get(AuthService);
+
+      const username = 'foo@bar.com';
+      const password = 'password';
+
+      const p = service.login(username, password);
+
+      const response = {
+        token: new Date().valueOf().toString(16),
+      };
+
+      if (connection == null) {
+        throw new Error('Authenticator did not make an HTTP request');
       }
-    };
-  });
 
-  beforeEach (() => {
-    authService = new AuthService(_mockServerService);
-  });
+      connection.mockRespond(new Response({
+        body: JSON.stringify(response),
+        status: 200,
+        statusText: 'OK',
+        headers: new Headers(),
+        type: ResponseType.Basic,
+        url: '/auth/login',
+        merge: null
+      }));
 
-  it('should return a promise', () => {
-    let loginPromise = authService.login('user', 'pass');
-    let payload = {promise: loginPromise};
-    expect(isPromise(payload)).toBe(true);
-  });
+      tick();
 
-  it('should login successfully', async(() => {
-    authService.login('user', 'pass')
-    .then((data) => {
-      expect(data).not.toBeUndefined();
-      expect(data).toEqual({id: credentials.id, name: credentials.name});
-    });
-  }));
-
-  it('should not login successfully when a password is missing',
-   async(() => {
-    authService.login('user')
-    .then((data) => {
-      expect(data).toBeUndefined();
-    })
-    .then(null, (err) => {
-      expect(err).not.toBeUndefined();
-    });
-  }));
-
-  it('should not login successfully with an invalid username',
-   async(() => {
-    authService.login('invalidUser', 'pass')
-    .then((data) => {
-      expect(data).toBeUndefined();
-    })
-    .then(null, (err) => {
-      expect(err).not.toBeUndefined();
-    });
-  }));
-
-  it('should not login successfully with an invalid password',
-   async(() => {
-    authService.login('user', 'invalidPass')
-    .then((data) => {
-      expect(data).toBeUndefined();
-    })
-    .then(null, (err) => {
-      expect(err).not.toBeUndefined();
-    });
-  }));
-
+      return p.then(r => expect(r.token).toEqual(response.token));
+    })));
 });

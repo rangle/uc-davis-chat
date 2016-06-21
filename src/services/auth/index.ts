@@ -1,22 +1,25 @@
-import { Injectable, provide } from '@angular/core';
-import { ServerService } from '../server/';
+import {
+  Injectable,
+  Inject,
+  provide
+} from '@angular/core';
+
+import { Http } from '@angular/http';
+
+import { ServerService } from '../server';
 
 @Injectable()
 export class AuthService {
-
-  constructor(
-    private serverService: ServerService
-    ) {}
+  constructor(private service: ServerService) {}
 
   public login(username: string, password: string) {
+    const body = {username, password};
+
     return new Promise((resolve, reject) => {
-      return this.serverService.post('/auth/login',
-        {username: username, password: password})
-        .map((response: any) => response.meta)
+      this.service.post('/auth/login', body)
         .subscribe(
-          (user) => resolve(user),
-          err => reject({username, password})
-        );
+          r => resolve(r),
+          e => reject({username, password}));
     });
   }
 }
