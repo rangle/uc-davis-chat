@@ -4,8 +4,8 @@ import { Map, fromJS } from 'immutable';
 const INITIAL_STATE = fromJS({
   token: null,
   user: {},
-  hasError: false,
-  isLoading: false,
+  failure: false,
+  pending: false,
 });
 
 export type Session = Map<string, any>;
@@ -19,8 +19,8 @@ export function sessionReducer(
     return state.merge({
       token: null,
       user: {},
-      hasError: false,
-      isLoading: true,
+      failure: false,
+      pending: true,
     });
 
   case SessionActions.LOGIN_USER_SUCCESS:
@@ -29,14 +29,14 @@ export function sessionReducer(
       user: {
         username: action.payload.username,
       },
-      hasError: false,
-      isLoading: false,
+      failure: false,
+      pending: false,
     });
 
   case SessionActions.LOGIN_USER_ERROR:
     return state.merge({
-      hasError: true,
-      isLoading: false,
+      failure: true,
+      pending: false,
     });
 
   case SessionActions.LOGOUT_USER:

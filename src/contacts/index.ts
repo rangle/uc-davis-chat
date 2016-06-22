@@ -1,12 +1,9 @@
+import { Map } from 'immutable';
+
 export enum Presence {
   Offline,
   Idle,
   Online,
 };
 
-export interface Contact {
-  username: string;
-  presence: Presence;
-  typing: boolean;
-  lastMessage: Date;
-}
+export type Contact = Map<string, any>;

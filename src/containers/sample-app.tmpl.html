@@ -1,8 +1,8 @@
 <div>
   <rio-login-modal
-    (onSubmit)="actions.loginUser($event)"
-    [hasError]="hasError$ | async"
-    [isPending]="isLoading$ | async"
+    (submit)="actions.loginUser($event)"
+    [failure]="failure$ | async"
+    [pending]="pending$ | async"
     *ngIf="loggedOut$ | async">
   </rio-login-modal>
 

@@ -29,22 +29,13 @@ import {
         Contacts
       </h2>
       <rio-contacts
-        [contacts$]="people$"
-        [addingContact$]="addingContact$"
-        (addContact)="actions.addContact($event)"></rio-contacts>
+        (add)="actions.add($event)"
+        (cancel)="actions.cancel()"
+        (request)="actions.request($event)">
+      </rio-contacts>
     </rio-container>
   `
 })
 export class RioContactsPage {
-  @select() private contacts$: Observable<Contacts>;
-
-  private addingContact$: Observable<boolean>;
-  private people$: Observable<Contact>;
-
-  constructor(private actions: ContactsActions) {
-    this.people$ = this.contacts$.map(c => c.get('people'));
-
-    this.addingContact$ = this.contacts$.map(
-      c => c.getIn(['state', 'addingContact']));
-  }
+  constructor(private actions: ContactsActions) {}
 }

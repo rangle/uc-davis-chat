@@ -43,14 +43,14 @@ describe('Component: Login Form', () => {
           .toContain('display-none');
         expect(element.querySelector('#qa-login-button')).not.toBeNull();
         expect(element.querySelector('#qa-clear-button')).not.toBeNull();
-        expect(fixture.componentInstance.onSubmit).toBeTruthy();
+        expect(fixture.componentInstance.submit).toBeTruthy();
       });
   })));
 
-  it('should display alert if the form hasError', async(inject([], () => {
+  it('should display alert if the form failed', async(inject([], () => {
     return builder.createAsync(RioLoginForm)
       .then((fixture: ComponentFixture<any>) => {
-        fixture.componentInstance.hasError = true;
+        fixture.componentInstance.failure = true;
         fixture.autoDetectChanges();
         let alert = fixture.nativeElement.querySelector('#qa-alert');
         expect(alert).not.toBeNull();
@@ -58,10 +58,10 @@ describe('Component: Login Form', () => {
       });
   })));
 
-  it('should display alert if the form isPending', async(inject([], () => {
+  it('should display alert if the form pending', async(inject([], () => {
     return builder.createAsync(RioLoginForm)
       .then((fixture: ComponentFixture<any>) => {
-        fixture.componentInstance.isPending = true;
+        fixture.componentInstance.pending = true;
         fixture.autoDetectChanges();
         let alert = fixture.nativeElement.querySelector('#qa-pending');
         expect(alert).not.toBeNull();
@@ -106,7 +106,7 @@ describe('Component: Login Form', () => {
           fixture.componentInstance.username._value = 'user';
           fixture.componentInstance.password._value = 'pass';
           fixture.autoDetectChanges();
-          fixture.componentInstance.onSubmit.subscribe(data => {
+          fixture.componentInstance.submit.subscribe(data => {
             expect(data).toBeDefined();
             expect(data.username).toEqual('user');
             expect(data.password).toEqual('pass');

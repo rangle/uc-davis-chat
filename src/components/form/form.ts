@@ -4,13 +4,13 @@ import { NgFormModel } from '@angular/common';
 @Component({
   selector: 'rio-form',
   template: `
-    <form [ngFormModel]="formModel"
-      (ngSubmit)="onSubmit.emit($event)">
+    <form [ngFormModel]="formModel" (ngSubmit)="submit.emit($event)">
       <ng-content></ng-content>
     </form>
   `
 })
 export class RioForm {
   @Input() formModel: NgFormModel;
-  @Output() onSubmit = new EventEmitter<Event>();
+
+  @Output() submit = new EventEmitter<Event>();
 };

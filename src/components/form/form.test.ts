@@ -38,18 +38,18 @@ describe('Component: Form', () => {
           .query(By.directive(RioForm));
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
-        expect(query.componentInstance.onSubmit).toBeTruthy();
+        expect(query.componentInstance.submit).toBeTruthy();
         expect(query.componentInstance.formModel).toBeTruthy();
       });
   })));
 
-  it('should emit event when onSubmit is invoked', async(inject([], () => {
+  it('should emit event when submit is invoked', async(inject([], () => {
     return builder.createAsync(RioFormTestController)
       .then((fixture: ComponentFixture<any>) => {
         fixture.autoDetectChanges();
         let query = fixture.debugElement
           .query(By.directive(RioForm));
-        query.componentInstance.onSubmit.subscribe(c => {
+        query.componentInstance.submit.subscribe(c => {
           expect(c).toBeDefined();
         });
         query.nativeElement.querySelector('button').click();

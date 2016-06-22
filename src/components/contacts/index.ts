@@ -7,6 +7,10 @@ import {
 } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 
+import { select } from 'ng2-redux';
+
+import { Map } from 'immutable';
+
 import { Observable } from 'rxjs/Observable';
 
 import { RioAddContactForm } from './add-contact-form';
@@ -19,13 +23,14 @@ import {
   Contact,
   Presence
 } from '../../contacts';
+import { Contacts } from '../../reducers/contacts';
 
 @Component({
   selector: 'rio-contacts',
   template: `
     <div>
       <ul>
-        <li *ngFor="let contact of contacts$ | async">
+        <li *ngFor="let contact of people$ | async">
           <div class="presence"
             [ngClass]="{
               'idle': contact.presence === presence.Idle,
@@ -44,9 +49,10 @@ import {
       <rio-modal *ngIf="addingContact$ | async">
         <rio-modal-content>
           <rio-add-contact-form
-            [isPending]="isPending"
-            [hasError]="hasError"
-            (onSubmit)="onSubmitAdd($event)">
+            [pending]="addPending$ | async"
+            [failure]="addFailure$ | async"
+            (cancel)="onCancel()"
+            (add)="onAdd($event)">
           </rio-add-contact-form>
         </rio-modal-content>
       </rio-modal>
@@ -62,17 +68,38 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RioContacts {
-  @Input() contacts$: Observable<Contact>;
-  @Input() addingContact$: Observable<boolean>;
+  @select() contacts$: Observable<Contacts>;
 
-  @Output() addContact: EventEmitter<void> = new EventEmitter<void>();
+  @Output() add: EventEmitter<void> = new EventEmitter<void>();
+  @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
+  @Output() request: EventEmitter<Contact> = new EventEmitter<Contact>();
 
   private presence = Presence;
 
-  private onAddContact() {
-    this.addContact.emit(void 0);
+  private people$: Observable<Contact>;
+  private addingContact$: Observable<boolean>;
+  private addPending$: Observable<boolean>;
+  private addFailure$: Observable<string>;
+
+  constructor() {
+    this.people$ = this.contacts$.map(c => c.get('people'));
+
+    const add = this.contacts$.map(c => c.get('add'));
+
+    this.addingContact$ = add.map(c => c.get('modal'));
+    this.addPending$ = add.map(c => c.get('pending'));
+    this.addFailure$ = add.map(c => c.get('failure'));
   }
 
-  private onSubmitAdd(contact: Contact) {
+  private onAddContact = () => {
+    this.add.emit(void 0);
+  }
+
+  private onAdd = (contact: Contact) => {
+    this.request.emit(contact);
+  }
+
+  private onCancel = () => {
+    this.cancel.emit(void 0);
   }
 };

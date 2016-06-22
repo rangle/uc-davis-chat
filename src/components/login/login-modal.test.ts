@@ -36,7 +36,7 @@ describe('Component: Login Modal', () => {
         expect(element.querySelector('rio-modal-content')).not.toBeNull();
         expect(element.querySelector('h1').innerText).toEqual('Login');
         expect(element.querySelector('rio-login-form')).not.toBeNull();
-        expect(fixture.componentInstance.onSubmit).toBeTruthy();
+        expect(fixture.componentInstance.submit).toBeTruthy();
       });
   })));
 
@@ -46,7 +46,7 @@ describe('Component: Login Modal', () => {
         .then((fixture: ComponentFixture<any>) => {
           let login = { username: 'user', password: 'pass' };
           fixture.componentInstance.handleSubmit(login);
-          fixture.componentInstance.onSubmit.subscribe(data => {
+          fixture.componentInstance.submit.subscribe(data => {
             expect(data).toBeDefined();
             expect(data.username).toEqual('user');
             expect(data.password).toEqual('pass');

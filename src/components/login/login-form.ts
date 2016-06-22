@@ -36,14 +36,10 @@ import { validateEmail } from '../form/validators';
     RioLabel
   ],
   template: `
-    <rio-form
-      [formModel]="group"
-      (onSubmit)="handleSubmit()">
+    <rio-form [formModel]="group" (submit)="onSubmit()">
       <rio-alert qaid="qa-pending" status='info'
-        *ngIf="isPending">Loading...</rio-alert>
-      <rio-alert
-        qaid="qa-alert"
-        status='error'*ngIf="hasError">
+        *ngIf="pending">Loading...</rio-alert>
+      <rio-alert qaid="qa-alert" status='error' *ngIf="failure">
         Invalid username and password
       </rio-alert>
 
@@ -56,7 +52,7 @@ import { validateEmail } from '../form/validators';
           [formControl]="username"></rio-input>
         <rio-form-error
           qaid="qa-uname-validation"
-          [visible]="showNameWarning()">
+          [visible]="username.touched && username.valid === false">
           Please enter a valid email address
         </rio-form-error>
       </rio-form-group>
@@ -70,7 +66,7 @@ import { validateEmail } from '../form/validators';
           [formControl]="password"></rio-input>
         <rio-form-error
           qaid="qa-password-validation"
-          [visible]="showPasswordWarning()">
+          [visible]="password.touched && password.valid === false">
           Password is required
         </rio-form-error>
       </rio-form-group>
@@ -86,7 +82,7 @@ import { validateEmail } from '../form/validators';
         <rio-button
           qaid="qa-clear-button"
           className="bg-red"
-          (onClick)="reset()">
+          (onClick)="onReset()">
           Clear
         </rio-button>
       </rio-form-group>
@@ -94,47 +90,35 @@ import { validateEmail } from '../form/validators';
   `
 })
 export class RioLoginForm {
-  @Input() isPending: boolean;
-  @Input() hasError: boolean;
-  @Output() onSubmit: EventEmitter<Object> = new EventEmitter();
+  @Input() pending: boolean;
+  @Input() failure: boolean;
+  @Output() submit: EventEmitter<Object> = new EventEmitter();
+
   private username: Control;
   private password: Control;
   private group: ControlGroup;
 
   constructor(private builder: FormBuilder) {
-    this.reset();
-  }
-
-  private showNameWarning() {
-    return this.username.touched && this.username.valid === false;
-  }
-
-  private showPasswordWarning() {
-    return this.password.touched && this.password.valid === false;
+    this.onReset();
   }
 
   private valid() {
     return this.username.valid && this.password.valid;
   }
 
-  private handleSubmit() {
-    this.password.markAsTouched();
-    this.username.markAsTouched();
-
-    if (this.password.value && this.username.value) {
-      this.onSubmit.emit(this.group.value);
-    }
+  private onSubmit() {
+    this.submit.emit(this.group.value);
   }
 
-  private reset() {
-    this.username = new Control('',
-      Validators.compose([Validators.required, validateEmail]));
+  private onReset() {
+    const validEmail = Validators.compose([Validators.required, validateEmail]);
 
-    this.password = new Control('', Validators.required);
+    this.username = new Control(null, validEmail);
+    this.password = new Control(null, Validators.required);
 
-    this.hasError = false;
+    this.failure = false;
 
-    this.isPending = false;
+    this.pending = false;
 
     this.group = this.builder.group({
       username: this.username,

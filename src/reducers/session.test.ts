@@ -20,7 +20,7 @@ describe('Session Reducer', () => {
         sessionReducer,
         state,
         SessionActions.LOGIN_USER_PENDING);
-      expect(state.get('isLoading')).toBeTruthy;
+      expect(state.get('pending')).toBeTruthy;
       expect(state.get('token')).toEqual(null);
     });
   });
@@ -33,8 +33,8 @@ describe('Session Reducer', () => {
         SessionActions.LOGIN_USER_SUCCESS,
         { token: 1234 });
 
-      expect(state.get('isLoading')).toBeFalsy;
-      expect(state.get('hasError')).toBeFalsy;
+      expect(state.get('pending')).toBeFalsy;
+      expect(state.get('failure')).toBeFalsy;
       expect(state.get('token')).toEqual(1234);
     });
   });
@@ -46,8 +46,8 @@ describe('Session Reducer', () => {
         state,
         SessionActions.LOGIN_USER_ERROR);
 
-      expect(state.get('isLoading')).toBeFalsy;
-      expect(state.get('hasError')).toBeTruthy;
+      expect(state.get('pending')).toBeFalsy;
+      expect(state.get('failure')).toBeTruthy;
     });
   });
 
@@ -59,8 +59,8 @@ describe('Session Reducer', () => {
         state,
         SessionActions.LOGOUT_USER);
 
-      expect(state.get('isLoading')).toBeTruthy;
-      expect(state.get('hasError')).toBeFalsy;
+      expect(state.get('pending')).toBeTruthy;
+      expect(state.get('failure')).toBeFalsy;
       expect(state.get('token')).toEqual(null);
     });
   });

@@ -42,11 +42,11 @@ import {
 export class RioSampleApp {
   @select() session$: Observable<Session>;
 
-  hasError$: Observable<boolean>;
-  isLoading$: Observable<boolean>;
-  loggedIn$: Observable<boolean>;
-  loggedOut$: Observable<boolean>;
-  userName$: Observable<string>;
+  private failure$: Observable<boolean>;
+  private pending$: Observable<boolean>;
+  private loggedIn$: Observable<boolean>;
+  private loggedOut$: Observable<boolean>;
+  private userName$: Observable<string>;
 
   constructor(
     private ngRedux: NgRedux<IAppState>,
@@ -54,8 +54,8 @@ export class RioSampleApp {
 
     ngRedux.configureStore(rootReducer, {}, middleware, enhancers);
 
-    this.hasError$  = this.session$.map(s => !!s.get('hasError'));
-    this.isLoading$ = this.session$.map(s => !!s.get('isLoading'));
+    this.failure$   = this.session$.map(s => !!s.get('failure'));
+    this.pending$   = this.session$.map(s => !!s.get('pending'));
     this.loggedIn$  = this.session$.map(s => !!s.get('token'));
     this.loggedOut$ = this.loggedIn$.map(loggedIn => !loggedIn);
     this.userName$  = this.session$.map(s => s.getIn(['user', 'username'], ''));
