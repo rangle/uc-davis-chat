@@ -15,12 +15,10 @@ import { ContactsState } from '../../reducers/contacts.reducer';
   `,
 })
 export class RioContactsList {
-  @select(state => mapContacts(state.contacts)) contacts$: Observable<ContactsState>;
-  keys = Object.keys;
-  
+  @select(mapContacts) contacts$: Observable<ContactsState>;
 }
 
-function mapContacts(contacts) {
-  return Object.keys(contacts)
-    .map((contact) => contacts[contact].name);
+function mapContacts(state) {
+  return Object.keys(state.contacts)
+    .map((contact) => state.contacts[contact].name);
 }

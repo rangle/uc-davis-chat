@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fc67c4cb-f0fe-4073-a24b-3644dce17b69" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/actions/contacts.actions.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/contacts/contacts.component.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/reducers/contacts.reducer.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/sample-app.tmpl.html" afterPath="$PROJECT_DIR$/src/containers/sample-app.tmpl.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/containers/sample-app.ts" afterPath="$PROJECT_DIR$/src/containers/sample-app.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/reducers/index.ts" afterPath="$PROJECT_DIR$/src/reducers/index.ts" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/contacts/contacts.component.ts" afterPath="$PROJECT_DIR$/src/components/contacts/contacts.component.ts" />
     </list>
     <ignored path="uc-davis-chat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +27,7 @@
       <file leaf-file-name="login-form.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/login/login-form.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
+            <state relative-caret-position="165">
               <caret line="125" column="76" selection-start-line="125" selection-start-column="76" selection-end-line="125" selection-end-column="76" />
               <folding>
                 <element signature="e#0#79#0" expanded="true" />
@@ -56,21 +50,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contacts.component.ts" pinned="false" current-in-tab="false">
+      <file leaf-file-name="contacts.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/contacts/contacts.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+            <state relative-caret-position="195">
+              <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
-                <marker date="1466638733000" expanded="true" signature="267:361" ph="..." />
-                <marker date="1466638733000" expanded="true" signature="319:350" ph="..." />
+                <marker date="1466638935000" expanded="true" signature="267:361" ph="..." />
+                <marker date="1466638935000" expanded="true" signature="319:350" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contacts.reducer.ts" pinned="false" current-in-tab="true">
+      <file leaf-file-name="contacts.reducer.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/reducers/contacts.reducer.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
@@ -103,8 +97,8 @@
         <option value="$PROJECT_DIR$/src/containers/sample-app.ts" />
         <option value="$PROJECT_DIR$/src/containers/sample-app.tmpl.html" />
         <option value="$PROJECT_DIR$/src/reducers/index.ts" />
-        <option value="$PROJECT_DIR$/src/components/contacts/contacts.component.ts" />
         <option value="$PROJECT_DIR$/src/reducers/contacts.reducer.ts" />
+        <option value="$PROJECT_DIR$/src/components/contacts/contacts.component.ts" />
       </list>
     </option>
   </component>
@@ -328,12 +322,12 @@
       <updated>1466628307673</updated>
       <workItem from="1466628311581" duration="3026000" />
       <workItem from="1466632385840" duration="826000" />
-      <workItem from="1466634025618" duration="4596000" />
+      <workItem from="1466634025618" duration="4749000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8448000" />
+    <option name="totallyTimeSpent" value="8601000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="800" height="573" extended-state="6" />
@@ -347,7 +341,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32712215" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3457557" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3457557" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -468,6 +462,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-60">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -695,7 +690,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/login/login-form.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
+        <state relative-caret-position="165">
           <caret line="125" column="76" selection-start-line="125" selection-start-column="76" selection-end-line="125" selection-end-column="76" />
           <folding>
             <element signature="e#0#79#0" expanded="true" />
@@ -741,23 +736,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/contacts/contacts.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-            <marker date="1466638733000" expanded="true" signature="267:361" ph="..." />
-            <marker date="1466638733000" expanded="true" signature="319:350" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/reducers/contacts.reducer.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="308">
           <caret line="29" column="19" selection-start-line="29" selection-start-column="19" selection-end-line="29" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/contacts/contacts.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="22" column="27" selection-start-line="22" selection-start-column="27" selection-end-line="22" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+            <marker date="1466638935000" expanded="true" signature="267:361" ph="..." />
+            <marker date="1466638935000" expanded="true" signature="319:350" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
