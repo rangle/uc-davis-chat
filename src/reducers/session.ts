@@ -8,10 +8,10 @@ const INITIAL_STATE = fromJS({
   isLoading: false,
 });
 
-export type ISession = Map<string, any>;
+export type Session = Map<string, any>;
 
 export function sessionReducer(
-  state: ISession = INITIAL_STATE,
+  state: Session = INITIAL_STATE,
   action: any = {type: ''}) {
 
   switch (action.type) {
@@ -26,7 +26,9 @@ export function sessionReducer(
   case SessionActions.LOGIN_USER_SUCCESS:
     return state.merge({
       token: action.payload.token,
-      user: action.payload.profile,
+      user: {
+        username: action.payload.username,
+      },
       hasError: false,
       isLoading: false,
     });

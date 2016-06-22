@@ -12,18 +12,6 @@
     </rio-navigator-item>
 
     <rio-navigator-item *ngIf="loggedIn$ | async" [mr]=true>
-      <a [routerLink]="['Counter']"
-        class="text-decoration-none">Counter</a>
-    </rio-navigator-item>
-
-    <rio-navigator-item *ngIf="loggedIn$ | async">
-      <a [routerLink]="['About']"
-        class="text-decoration-none">About Us</a>
-    </rio-navigator-item>
-
-    <div class="flex flex-auto"></div>
-
-    <rio-navigator-item *ngIf="loggedIn$ | async" [mr]=true>
       {{ userName$ | async }}
     </rio-navigator-item>
 

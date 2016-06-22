@@ -1,7 +1,7 @@
 import { RioAlert } from './alert';
 import { RioButton } from './button';
 import { RioContainer } from './container';
-import { RioCounter } from './counter';
+import { RioContacts } from './contacts';
 import { RioLogo } from './logo';
 import { RioLoginModal, RioLoginForm } from './login';
 import { RioNavigator, RioNavigatorItem } from './navigator';
@@ -18,7 +18,7 @@ export {
   RioAlert,
   RioButton,
   RioContainer,
-  RioCounter,
+  RioContacts,
   RioInput,
   RioLogo,
   RioLoginModal,

@@ -6,10 +6,9 @@ import { Map } from 'immutable';
 import { NgRedux, select } from 'ng2-redux';
 
 import { IAppState } from '../reducers';
-import { ISession } from '../reducers/session';
+import { Session } from '../reducers/session';
 import { SessionActions } from '../actions/session';
-import { RioAboutPage } from './about-page';
-import { RioCounterPage } from './counter-page';
+import { RioContactsPage } from './contacts-page';
 import rootReducer from '../reducers';
 import { middleware, enhancers } from '../store';
 
@@ -28,26 +27,20 @@ import {
     RioLoginModal, RioLogo, RioButton
   ],
   pipes: [ AsyncPipe ],
-  // Allow app to define global styles.
   encapsulation: ViewEncapsulation.None,
-  styles: [ require('../styles/index.css') ],
+  styles: [require('../styles/index.css')],
   template: require('./sample-app.tmpl.html')
 })
 @RouteConfig([
   {
-    path: '/counter',
-    name: 'Counter',
-    component: RioCounterPage,
+    path: '/contacts',
+    name: 'Contacts',
+    component: RioContactsPage,
     useAsDefault: true
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: RioAboutPage
   }
 ])
 export class RioSampleApp {
-  @select() session$: Observable<ISession>;
+  @select() session$: Observable<Session>;
 
   hasError$: Observable<boolean>;
   isLoading$: Observable<boolean>;
@@ -65,11 +58,6 @@ export class RioSampleApp {
     this.isLoading$ = this.session$.map(s => !!s.get('isLoading'));
     this.loggedIn$  = this.session$.map(s => !!s.get('token'));
     this.loggedOut$ = this.loggedIn$.map(loggedIn => !loggedIn);
-    this.userName$  = this.session$.map(s => {
-      return [
-        s.getIn(['user', 'firstName'], ''),
-        s.getIn(['user', 'lastName'], '')
-        ].join(' ');
-    });
+    this.userName$  = this.session$.map(s => s.getIn(['user', 'username'], ''));
   }
 };

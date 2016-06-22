@@ -19,4 +19,5 @@ export class RioInput {
   @Input() placeholder = '';
   @Input() formControl: NgFormControl;
   @Input() qaid: string;
+  @Input() validator: RegExp;
 };

@@ -19,6 +19,7 @@ export class SessionActions {
     const password = credentials.password;
 
     this.ngRedux.dispatch({ type: SessionActions.LOGIN_USER_PENDING });
+
     this.authService.login(username, password)
       .then(result => this.ngRedux.dispatch({
           type: SessionActions.LOGIN_USER_SUCCESS,
@@ -32,4 +33,4 @@ export class SessionActions {
   logoutUser = () => {
     this.ngRedux.dispatch({ type: SessionActions.LOGOUT_USER });
   };
-} 
+}

@@ -5,6 +5,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   template: `
     <button
       [id]="qaid"
+      [disabled]="disabled"
       (click)="handleClick($event)"
       type="{{type || 'button'}}"
       class="btn btn-primary {{className}}">
@@ -15,6 +16,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class RioButton {
   @Input() className: string;
+  @Input() disabled: boolean;
   @Input() type: string;
   @Input() qaid: string;
   @Output() onClick = new EventEmitter<Event>();

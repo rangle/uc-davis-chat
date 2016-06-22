@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
 import {
   FORM_DIRECTIVES,
   FormBuilder,
@@ -7,16 +12,28 @@ import {
   Validators
 } from '@angular/common';
 
-import { RioForm, RioFormError, RioFormGroup, RioLabel } from '../form';
+import {
+  RioForm,
+  RioFormError,
+  RioFormGroup,
+  RioLabel
+} from '../form';
 import { RioAlert } from '../alert';
 import { RioButton } from '../button';
 import { RioInput } from '../form/input';
+import { validateEmail } from '../form/validators';
 
 @Component({
   selector: 'rio-login-form',
   directives: [
-    FORM_DIRECTIVES, RioAlert, RioButton, RioInput,
-    RioForm, RioFormError, RioFormGroup, RioLabel
+    FORM_DIRECTIVES,
+    RioAlert,
+    RioButton,
+    RioInput,
+    RioForm,
+    RioFormError,
+    RioFormGroup,
+    RioLabel
   ],
   template: `
     <rio-form
@@ -40,7 +57,7 @@ import { RioInput } from '../form/input';
         <rio-form-error
           qaid="qa-uname-validation"
           [visible]="showNameWarning()">
-          Username is required.
+          Please enter a valid email address
         </rio-form-error>
       </rio-form-group>
 
@@ -54,13 +71,14 @@ import { RioInput } from '../form/input';
         <rio-form-error
           qaid="qa-password-validation"
           [visible]="showPasswordWarning()">
-          Password is required.
+          Password is required
         </rio-form-error>
       </rio-form-group>
 
       <rio-form-group>
         <rio-button
           qaid="qa-login-button"
+          [disabled]="valid() === false"
           className="mr1"
           type="submit">
           Login
@@ -87,19 +105,19 @@ export class RioLoginForm {
     this.reset();
   }
 
-  showNameWarning() {
-    return this.username.touched
-      && !this.username.valid
-      && this.username.hasError('required');
+  private showNameWarning() {
+    return this.username.touched && this.username.valid === false;
   }
 
-  showPasswordWarning() {
-    return this.password.touched
-      && !this.password.valid
-      && this.password.hasError('required');
+  private showPasswordWarning() {
+    return this.password.touched && this.password.valid === false;
   }
 
-  handleSubmit() {
+  private valid() {
+    return this.username.valid && this.password.valid;
+  }
+
+  private handleSubmit() {
     this.password.markAsTouched();
     this.username.markAsTouched();
 
@@ -108,14 +126,19 @@ export class RioLoginForm {
     }
   }
 
-  reset() {
-    this.username = new Control('', Validators.required);
+  private reset() {
+    this.username = new Control('',
+      Validators.compose([Validators.required, validateEmail]));
+
     this.password = new Control('', Validators.required);
+
     this.hasError = false;
+
     this.isPending = false;
+
     this.group = this.builder.group({
       username: this.username,
-      password: this.password
+      password: this.password,
     });
   }
 };
