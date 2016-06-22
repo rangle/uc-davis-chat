@@ -1,14 +1,12 @@
-import { Component, ViewEncapsulation, ApplicationRef } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { Map } from 'immutable';
 import { NgRedux, select } from 'ng2-redux';
 
 import { IAppState } from '../reducers';
 import { Session } from '../reducers/session';
 import { SessionActions } from '../actions/session';
-import { RioContactsPage } from './contacts-page';
 import rootReducer from '../reducers';
 import { middleware, enhancers } from '../store';
 
@@ -31,14 +29,6 @@ import {
   styles: [require('../styles/index.css')],
   template: require('./sample-app.tmpl.html')
 })
-@RouteConfig([
-  {
-    path: '/contacts',
-    name: 'Contacts',
-    component: RioContactsPage,
-    useAsDefault: true
-  }
-])
 export class RioSampleApp {
   @select() session$: Observable<Session>;
 
