@@ -31,7 +31,7 @@ passport.use(new LocalStrategy(
     authPassport.authenticateUser(username, username, password, users)
       .then(
         res => done(null, res),
-        msg => done(null, false, message));
+        msg => done(null, false, msg));
   }));
 
 passport.serializeUser((user, done) => done(null, user));

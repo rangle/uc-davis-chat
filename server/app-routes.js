@@ -1,13 +1,11 @@
-module.exports = function (app, users) {
-  app.put('/api/contacts/add/:email', (req, response) => {
-    const email = request.params.email;
+'use strict';
 
-
-  });
-
-  app.get('/api/contacts/list', (req, response) => {
-    const list = Object.keys(users).map(key => users[key]);
-
-    response.send(list);
-  });
-};
+// module.exports = () => {
+//   // app.put('/api/contacts/add/:email', () => {});
+//
+//   // app.get('/api/contacts/list', (req, response) => {
+//   //   const list = Object.keys(users).map(key => users[key]);
+//   //
+//   //   response.send(list);
+//   // });
+// };

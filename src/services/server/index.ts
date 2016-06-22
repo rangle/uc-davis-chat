@@ -1,5 +1,5 @@
-import { Injectable, provide } from '@angular/core';
-import {Http, Request, Response, Headers} from '@angular/http';
+import { Injectable } from '@angular/core';
+import {Http, Response, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 
 const HEADERS = new Headers({ 'Content-Type': 'application/json' });

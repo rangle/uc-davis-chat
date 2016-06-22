@@ -16,7 +16,8 @@ const INITIAL_STATE = fromJS({
 
 export type Contacts = Map<string, any>;
 
-export function contactsReducer(state: Contacts = INITIAL_STATE, action) {
+export function contactsReducer(state: Contacts = INITIAL_STATE, 
+                                action = { type: 'test', payload: ''}) {
   switch (action.type) {
   case ContactsActions.ADD_CONTACT:
     return state.mergeIn(['add'],

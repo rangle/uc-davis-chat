@@ -79,7 +79,7 @@ describe('Component: Login Form', () => {
           let alert = fixture.nativeElement.
             querySelector('#qa-uname-validation');
           expect(alert).not.toBeNull();
-          expect(alert.innerText).toEqual('Username is required.');
+          expect(alert.innerText).toEqual('Please enter a valid email address');
         });
       })
   ));
@@ -94,7 +94,7 @@ describe('Component: Login Form', () => {
           let alert = fixture.nativeElement.
             querySelector('#qa-password-validation');
           expect(alert).not.toBeNull();
-          expect(alert.innerText).toEqual('Password is required.');
+          expect(alert.innerText).toEqual('Password is required');
         });
       })
   ));
@@ -113,30 +113,6 @@ describe('Component: Login Form', () => {
           });
           let button = fixture.nativeElement.querySelector('#qa-login-button');
           button.click();
-        });
-    }))
-  );
-
-  it('should call reset when the clear button is clicked',
-    async(inject([], () => {
-      return builder.createAsync(RioLoginForm)
-        .then((fixture: ComponentFixture<any>) => {
-          fixture.componentInstance.username._value = 'user';
-          fixture.componentInstance.password._value = 'pass';
-          fixture.detectChanges();
-          expect(fixture.componentInstance.username._value).toEqual('user');
-          expect(fixture.componentInstance.password._value).toEqual('pass');
-
-          spyOn(fixture.componentInstance, 'reset').and.callThrough();
-          let button = fixture.nativeElement.querySelector('#qa-clear-button');
-          button.click();
-
-          fixture.whenStable().then(() => {
-             fixture.detectChanges();
-             expect(fixture.componentInstance.reset).toHaveBeenCalled();
-             expect(fixture.componentInstance.username._value).toEqual('');
-             expect(fixture.componentInstance.password._value).toEqual('');
-          });
         });
     }))
   );
