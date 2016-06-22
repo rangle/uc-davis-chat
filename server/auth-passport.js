@@ -10,7 +10,7 @@ function generateToken(users) {
 }
 
 module.exports = {
-  authenticateUser: (username, password, users) => {
+  authenticateUser: (name, username, password, users) => {
     return new Promise((resolve, reject) => {
       if (users.hasOwnProperty(username)) {
         resolve(users[username]);
@@ -18,7 +18,7 @@ module.exports = {
 
       const token = generateToken(users);
 
-      const result = { id: username, username, token };
+      const result = { id: username, name, username, token };
 
       users[username] = result;
 

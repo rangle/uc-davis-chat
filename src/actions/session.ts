@@ -15,12 +15,14 @@ export class SessionActions {
     private authService: AuthService) {}
 
   loginUser(credentials) {
-    const username = credentials.username;
-    const password = credentials.password;
+    const {fullname, username, password} = credentials;
+    if (!username) {
+      return;
+    }
 
     this.ngRedux.dispatch({ type: SessionActions.LOGIN_USER_PENDING });
 
-    this.authService.login(username, password)
+    this.authService.login(fullname, username, password)
       .then(result => this.ngRedux.dispatch({
           type: SessionActions.LOGIN_USER_SUCCESS,
           payload: result

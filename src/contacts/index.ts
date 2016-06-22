@@ -6,4 +6,11 @@ export enum Presence {
   Online,
 };
 
+export enum AddContactState {
+  Idle,
+  Loading,
+  Adding,
+  Failed
+};
+
 export type Contact = Map<string, any>;

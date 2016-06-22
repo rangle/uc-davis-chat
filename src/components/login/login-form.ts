@@ -44,12 +44,23 @@ import { validateEmail } from '../form/validators';
       </rio-alert>
 
       <rio-form-group>
+        <rio-label qaid="qa-name-label">Name</rio-label>
+        <rio-input
+          qaid="qa-name-input"
+          inputType="text"
+          placeholder="Your full name"
+          [formControl]="fullname">
+        </rio-input>
+      </rio-form-group>
+
+      <rio-form-group>
         <rio-label qaid="qa-uname-label">Email</rio-label>
         <rio-input
           qaid="qa-uname-input"
           inputType='text'
           placeholder='Email address'
-          [formControl]="username"></rio-input>
+          [formControl]="username">
+        </rio-input>
         <rio-form-error
           qaid="qa-uname-validation"
           [visible]="username.touched && username.valid === false">
@@ -94,6 +105,7 @@ export class RioLoginForm {
   @Input() failure: boolean;
   @Output() submit: EventEmitter<Object> = new EventEmitter();
 
+  private fullname: Control;
   private username: Control;
   private password: Control;
   private group: ControlGroup;
@@ -113,6 +125,7 @@ export class RioLoginForm {
   private onReset() {
     const validEmail = Validators.compose([Validators.required, validateEmail]);
 
+    this.fullname = new Control(null);
     this.username = new Control(null, validEmail);
     this.password = new Control(null, Validators.required);
 
@@ -121,6 +134,7 @@ export class RioLoginForm {
     this.pending = false;
 
     this.group = this.builder.group({
+      fullname: this.fullname,
       username: this.username,
       password: this.password,
     });

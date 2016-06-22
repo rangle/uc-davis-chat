@@ -1,0 +1,9 @@
+<div>
+  <rio-input placeholder="Search name or email" [formControl]="search">
+  </rio-input>
+  <ul>
+    <li *ngFor="let contact of (list | filtered:search.value)">
+      {{contact.username}}
+    </li>
+  </ul>
+</div>

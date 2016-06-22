@@ -29,9 +29,9 @@ import {
         Contacts
       </h2>
       <rio-contacts
-        (add)="actions.add($event)"
+        (add)="actions.showAdd()"
         (cancel)="actions.cancel()"
-        (request)="actions.request($event)">
+        (request)="actions.add($event)">
       </rio-contacts>
     </rio-container>
   `

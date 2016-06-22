@@ -49,8 +49,8 @@ import { Contacts } from '../../reducers/contacts';
       <rio-modal *ngIf="addingContact$ | async">
         <rio-modal-content>
           <rio-add-contact-form
-            [pending]="addPending$ | async"
-            [failure]="addFailure$ | async"
+            [state]="addState$ | async"
+            [availablePeople$]="availablePeople$ | async"
             (cancel)="onCancel()"
             (add)="onAdd($event)">
           </rio-add-contact-form>
@@ -78,17 +78,21 @@ export class RioContacts {
 
   private people$: Observable<Contact>;
   private addingContact$: Observable<boolean>;
-  private addPending$: Observable<boolean>;
   private addFailure$: Observable<string>;
+  private addState$: Observable<boolean>;
+  private availablePeople$: Observable<Contact>;
 
   constructor() {
     this.people$ = this.contacts$.map(c => c.get('people'));
 
+    this.availablePeople$ =
+      this.contacts$.map(c => c.get('availablePeople').toJS());
+
     const add = this.contacts$.map(c => c.get('add'));
 
     this.addingContact$ = add.map(c => c.get('modal'));
-    this.addPending$ = add.map(c => c.get('pending'));
-    this.addFailure$ = add.map(c => c.get('failure'));
+
+    this.addState$ = add.map(c => c.get('state'));
   }
 
   private onAddContact = () => {
