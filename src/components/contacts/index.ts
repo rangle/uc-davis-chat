@@ -40,10 +40,6 @@ import { Contacts } from '../../reducers/contacts';
             }">
           </div>
           {{contact.username}}
-          <li class="actions">
-            <button>Chat</button>
-            <button>Remove</button>
-          </li>
         </li>
       </ul>
 

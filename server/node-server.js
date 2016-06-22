@@ -5,7 +5,6 @@ const winston       = require('winston');
 const helmet        = require('helmet');
 const nodeProxy     = require('./node-proxy');
 const nodeAppServer = require('./node-app-server');
-const appRoutes     = require('./app-routes');
 const authPassport  = require('./auth-passport');
 const bodyParser    = require('body-parser');
 const passport      = require('passport');
@@ -45,8 +44,6 @@ app.post('/api/auth/login',
     res.status(200).send(JSON.stringify(req.user));
   }
 );
-
-appRoutes(app, users);
 
 // API proxy logic: if you need to talk to a remote server from your client-side
 // app you can proxy it though here by editing ./proxy-config.js
