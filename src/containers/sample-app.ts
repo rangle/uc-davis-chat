@@ -10,6 +10,8 @@ import { SessionActions } from '../actions/session';
 import rootReducer from '../reducers';
 import { middleware, enhancers } from '../store';
 
+import { RioContactsList } from  '../components/contacts/contacts.component';
+
 import {
   RioButton,
   RioNavigator,
@@ -22,7 +24,7 @@ import {
   selector: 'rio-sample-app',
   directives: [
     ROUTER_DIRECTIVES, RioNavigator, RioNavigatorItem,
-    RioLoginModal, RioLogo, RioButton
+    RioLoginModal, RioLogo, RioButton, RioContactsList,
   ],
   pipes: [ AsyncPipe ],
   encapsulation: ViewEncapsulation.None,
@@ -30,7 +32,7 @@ import {
   template: require('./sample-app.tmpl.html')
 })
 export class RioSampleApp {
-  @select() session$: Observable<Session>;
+  @select('session') session$: Observable<Session>;
 
   private failure$: Observable<boolean>;
   private pending$: Observable<boolean>;
