@@ -74,6 +74,5 @@ export class RioContacts {
   }
 
   private onSubmitAdd(contact: Contact) {
-    console.log('add contact', contact);
   }
 };

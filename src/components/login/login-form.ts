@@ -48,11 +48,11 @@ import { validateEmail } from '../form/validators';
       </rio-alert>
 
       <rio-form-group>
-        <rio-label qaid="qa-uname-label">Username</rio-label>
+        <rio-label qaid="qa-uname-label">Email</rio-label>
         <rio-input
           qaid="qa-uname-input"
           inputType='text'
-          placeholder='Username'
+          placeholder='Email address'
           [formControl]="username"></rio-input>
         <rio-form-error
           qaid="qa-uname-validation"
